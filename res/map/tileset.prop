@@ -1,0 +1,69 @@
+{
+    "size": 16,
+    "tiles": [
+        {
+            "name": "air",
+            "solid": false
+        },
+        {
+            "name": "tree_1.top",
+            "solid": false
+        },
+        {
+            "name": "tall_grass_1",
+            "solid": false
+        },
+        {
+            "name": "tall_grass_2",
+            "solid": false
+        },
+        {
+            "name": "tall_grass_3",
+            "solid": false
+        },
+        {
+            "name": "tree_1.bottom",
+            "solid": false
+        },
+        {
+            "name": "grass_left_1",
+            "solid": true
+        },
+        {
+            "name": "grass_1",
+            "solid": true
+        },
+        {
+            "name": "grass_right_1",
+            "solid": true
+        },
+        {
+            "name": "grass_2",
+            "solid": true
+        },
+        {
+            "name": "ore",
+            "solid": true
+        },
+        {
+            "name": "dirt",
+            "solid": true
+        },
+        {
+            "name": "dirt_right",
+            "solid": true
+        },
+        {
+            "name": "dirt_left",
+            "solid": true
+        },
+        {
+            "name": "dirt_bottom_left",
+            "solid": true
+        },
+        {
+            "name": "dirt_bottom",
+            "solid": true
+        }
+    ]
+}
