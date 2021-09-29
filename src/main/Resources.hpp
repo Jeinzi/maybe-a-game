@@ -20,6 +20,7 @@ class Resources {
     static std::string getPath(std::string const& id);
     static sf::Texture const& getTexture(std::string const& id);
     static sf::SoundBuffer const& getSoundBuffer(std::string const& id);
+    static sf::Music& getMusic(std::string const& id);
 
   private:
     static bool isLoaded;
@@ -28,6 +29,7 @@ class Resources {
     static std::unordered_map<std::string, std::string> paths;
     static std::unordered_map<std::string, sf::Texture> textures;
     static std::unordered_map<std::string, sf::SoundBuffer> soundEffects;
+    static std::unordered_map<std::string, sf::Music> music;
 };
 
 #endif

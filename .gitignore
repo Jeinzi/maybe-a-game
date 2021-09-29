@@ -1,2 +1,8 @@
-.vscode
-build
+.vscode/
+build/
+.cache/
+.clangd/
+
+Ideas.md
+compile_commands.json
+game.plantuml

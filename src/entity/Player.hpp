@@ -2,6 +2,7 @@
 #define _PLAYER_HPP
 
 #include <cmath>
+#include <chrono>
 #include <cstdlib>
 #include <functional>
 
@@ -19,6 +20,7 @@ class Player : public sf::Drawable {
     void keyPressed(sf::Event event);
     void mouseButtonPressed(sf::Event event, sf::Vector2f worldCoordinates);
     void setTileMap(TileMap& tileMap);
+    sf::Vector2f getPosition() const;
 
   protected:
     void jump(float speed);
@@ -39,6 +41,7 @@ class Player : public sf::Drawable {
     sf::Sound jumpSound;
     TileMap* tileMap;
     Inventory inventory;
+    std::chrono::steady_clock::time_point timeLastStep;
 
     sf::Vector2f tr;
     sf::Vector2f br;

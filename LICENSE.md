@@ -1,17 +1,25 @@
-This repository is licensed under the MIT license, with the following exceptions:
+# Licensing
+The content of this repository is licensed either under the MIT license or, at your choice, under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). However, the following files are exceptions to this:
 
 ## Sound effects
-- jump0.ogg - jump4.ogg: Unlicense, taken from https://github.com/SleepyTrousers/EnderIO
-- grass_rustling.ogg: Unlicense, taken from https://freesound.org/people/alegemaate/sounds/364712/
+- jump[0-4].ogg: Taken from https://github.com/SleepyTrousers/EnderIO, license unclear
+- [grass_rustling.ogg](https://freesound.org/people/alegemaate/sounds/364712/) by alegemaate is licensed under CC0 1.0 Universal
+- [step_grass_[0-5].ogg](https://freesound.org/people/monte32/sounds/353799/) by monte32, split into individual files by me, is licensed under CC0 1.0 Universal
+- [step_wood_[0-5].ogg](https://freesound.org/people/Nox_Sound/sounds/530588/) by Nox_Sound, split into individual files by me, is licensed under CC0 1.0 Universal
+
+## Music
+- [Dunes at Night.ogg](https://ozzed.net/files/Albums/Dunes%20at%20Night/14%20Dunes%20at%20Night.mp3) by [Ozzed](https://ozzed.net) is licensed under CC BY-SA 3.0
+- [Winter.ogg
+](https://soundcloud.com/cybersdf/winter) by [CyberSDF](https://soundcloud.com/cybersdf) is licensed under CC BY 3.0
 
 ## Fonts
-- PressStart2P-Regular.ttf: Open Font License, refer to res/fonts/OFL.txt for details. Taken from https://fonts.google.com/specimen/Press+Start+2P
+Refer to res/fonts/OFL.txt for details of the Open Font License
+- [PressStart2P-Regular.ttf](https://fonts.google.com/specimen/Press+Start+2P) by CodeMan38 is licensed under the Open Font License.
 
 
-
-# MIT License
-
-Copyright (c) 2019 Julian Heinzel
+# License Texts
+## MIT License
+Copyright (c) 2019-2021 Julian Heinzel
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,8 +40,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-# The Unlicense
-
+## The Unlicense
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
@@ -58,3 +65,8 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <http://unlicense.org/>
+
+## Creative Commons Licenses
+- [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+- [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+- [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)

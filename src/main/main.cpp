@@ -14,15 +14,15 @@ int main() {
   srand(time(NULL));
   auto screen = sf::VideoMode::getDesktopMode();
   auto videoMode = sf::VideoMode(screen.width, screen.height);
-  sf::RenderWindow window(videoMode, "Flower Power", sf::Style::Fullscreen);
+  sf::RenderWindow window(videoMode, "Maybe a Game", sf::Style::Fullscreen);
   window.setVerticalSyncEnabled(true);
   window.setActive(false);
-  //window.setMouseCursorVisible(false);
 
   Resources::load();
-  sf::Vector2f size(screen.width / 16.f * 25, screen.height / 16.f * 25);
+
+  sf::Vector2f viewSize((float)screen.width / 16.f * 25.f, (float)screen.height / 16.f * 25.f);
   sf::Vector2f center(8*160, 4*160);
-  sf::View view(center, size);
+  sf::View view(center, viewSize);
   window.setView(view);
   GameStateManager gsm;
 
@@ -42,6 +42,18 @@ int main() {
       }
       else if (event.type == sf::Event::MouseWheelScrolled) {
         gsm.mouseWheelMoved(event);
+      }
+      else if (event.type == sf::Event::Resized)
+      {
+        auto newWindowSize = window.getSize();
+        auto oldViewSize = view.getSize();
+
+        viewSize = sf::Vector2f((float)newWindowSize.x / 16.f * 25.f, (float)newWindowSize.y / 16.f * 25.f);
+        view.setSize(viewSize);
+
+        // This is tricky. To 
+        view.zoom(std::round(oldViewSize.x / viewSize.x * 10) / 10);
+        window.setView(view);
       }
     }
     gsm.update(clock.restart());

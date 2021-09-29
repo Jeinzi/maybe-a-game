@@ -64,6 +64,42 @@
         {
             "name": "dirt_bottom",
             "solid": true
+        },
+        {
+            "name": "mud",
+            "solid": true
+        },
+        {
+            "name": "grass_anim_1",
+            "solid": false
+        },
+        {
+            "name": "grass_anim_2",
+            "solid": false
+        },
+        {
+            "name": "dirt_bottom_right",
+            "solid": true
+        },
+        {
+            "name": "water",
+            "solid": false
+        },
+        {
+            "name": "water_surface",
+            "solid": false
+        },
+        {
+            "name": "sand_1",
+            "solid": true
+        },
+        {
+            "name": "door",
+            "solid": false
+        },
+        {
+            "name": "plank_floor",
+            "solid": true
         }
     ]
 }

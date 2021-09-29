@@ -5,7 +5,7 @@ MenuState::MenuState(GameStateManager& gsm, Player& player)
   : GameState(gsm), zoom(1), player(player),
     tileMap(Resources::getTileSet("tileset"), "map") {
 
-  for (int i = 0; i < 10; ++i) {
+  for (int i = 0; i < 100; ++i) {
     addCloud(false);
   }
 }
@@ -15,6 +15,10 @@ MenuState::~MenuState() {}
 
 void MenuState::init() {
   player.setTileMap(tileMap);
+  sf::Music& music = Resources::getMusic("dunes_at_night");
+  music.setLoop(true);
+  music.setVolume(5);
+  music.play();
 }
 
 
@@ -24,7 +28,19 @@ void MenuState::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   zoom = 1;
   target.setView(view);
 
-  target.clear(sf::Color(249, 173, 186, 1));
+  // Background color.
+  sf::Color bgColor = sf::Color(249, 173, 186, 255);
+  int const unmodifiedDepth = 34 * 160;
+  int const blackDepth = 44 * 160;
+  auto y = player.getPosition().y;
+  if (y > unmodifiedDepth) {
+    bgColor.r -= y > blackDepth ? bgColor.r : (float)bgColor.r / (blackDepth - unmodifiedDepth) * (y - unmodifiedDepth);
+    bgColor.g -= y > blackDepth ? bgColor.g : (float)bgColor.g / (blackDepth - unmodifiedDepth) * (y - unmodifiedDepth);
+    bgColor.b -= y > blackDepth ? bgColor.b : (float)bgColor.b / (blackDepth - unmodifiedDepth) * (y - unmodifiedDepth);
+  }
+  target.clear(bgColor);
+
+  // Draw things.
   for (auto const& cloud: clouds) {
     target.draw(cloud, states);
   }
@@ -62,7 +78,7 @@ void MenuState::mouseButtonPressed(sf::Event event, sf::Vector2f worldCoordinate
 
 void MenuState::addCloud(bool createAtMaxX) {
   auto scale = tileMap.getCoordinateScale();
-  unsigned short maxDepth = 5 * scale;
+  unsigned short maxDepth = 33 * scale;
   auto mapSize = tileMap.getSize();
   float x;
   if (createAtMaxX) {

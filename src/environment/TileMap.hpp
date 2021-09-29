@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdio>
 #include <vector>
+#include <cmath>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
@@ -21,14 +22,16 @@ class TileMap : public sf::Drawable {
     ~TileMap();
     bool isSolid(unsigned int x, unsigned int y) const;
     unsigned short getCoordinateScale() const;
-    unsigned int getTileId(unsigned int x, unsigned int y) const;
+    int getTileId(unsigned int x, unsigned int y) const;
     sf::Vector2u getSize() const;
     std::vector<Item> hit(unsigned int x, unsigned int y);
     TileSet const& getTileSet() const;
+    void setLight(unsigned int x, unsigned int y);
 
   private:
+    sf::Vector2u lightPosition;
     unsigned short coordinateScale;
-    unsigned int** map;
+    int** map;
     unsigned int nDrawableTiles;
     sf::Vector2u size;
     sf::Sound sound;

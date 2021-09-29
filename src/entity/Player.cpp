@@ -7,8 +7,9 @@ Player::Player(float x, float y)
     animationStandIdle("amann_stand_idle", {0}),
     animationStandWalk("amann_stand_walk", {100}),
     currentAnimation(animationStandWalk),
-    tileMap(nullptr), inventory(116, 10) {
+    tileMap(nullptr), inventory(5000, 20) {
 
+  timeLastStep = std::chrono::steady_clock::now();
   inventory.store(Item("Apple", 100, 0.1));
 }
 
@@ -18,9 +19,11 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
   auto viewSize = view.getSize();
   auto mapSize = tileMap->getSize();
 
-  sf::Vector2f viewPos = integerPos;
-  viewPos.x += size.x / 2;
-  viewPos.y += size.y / 2;
+  sf::Vector2f viewPos;
+  viewPos.x = std::round(pos.x + size.x / 2);
+  viewPos.y = std::round(pos.y + size.y / 2);
+  // viewPos.x += rand() % 35 / 5.f;
+  // viewPos.y += rand() % 35 / 3.f;
 
 
   if (viewPos.x - viewSize.x / 2 < 0) {
@@ -117,6 +120,33 @@ void Player::update(sf::Time time) {
   }
   updateCorners();
 
+  // Play steps sounds.
+  float stepsPerBlock = 1.0;
+  float stepsPerPixel = stepsPerBlock / tileMap->getCoordinateScale();
+  float stepsPerSecond = stepsPerPixel * std::abs(v.x);
+  std::chrono::milliseconds milliSecondsPerStep(static_cast<int>(1000.f / stepsPerSecond));
+  auto timeNextStep = timeLastStep + milliSecondsPerStep;
+
+  if (v.x != 0 && v.y == 0 &&
+      std::chrono::steady_clock::now() >= timeNextStep &&
+      true /* TODO only on grass */)
+  {
+    std::string soundName;
+    auto id = tileMap->getTileId(pos.x, pos.y + size.y);
+    if ((id >= 6 && id <= 9) || id == 22) {
+      uint8_t soundId = rand() % 6;
+      soundName = "step_grass_" + std::to_string(soundId);
+    }
+    else {
+      uint8_t soundId = rand() % 6;
+      soundName = "step_wood_" + std::to_string(soundId);
+    }
+
+    jumpSound.setBuffer(Resources::getSoundBuffer(soundName));
+    jumpSound.play();
+    timeLastStep = std::chrono::steady_clock::now();
+  }
+
   // Update animation.
   if (fabs(v.x) > 0) {
     currentAnimation = std::ref(animationStandWalk);
@@ -129,6 +159,10 @@ void Player::update(sf::Time time) {
   integerPos = { std::round(pos.x), std::round(pos.y) };
   currentAnimation.get().setPosition(integerPos);
   currentAnimation.get().update(time);
+
+
+  // Update player light.
+  tileMap->setLight(pos.x, pos.y);
 }
 
 
@@ -157,9 +191,15 @@ void Player::setTileMap(TileMap& tileMap) {
   animationStandWalk.setHeight(1.2 * s);
 }
 
+
+sf::Vector2f Player::getPosition() const {
+  return pos;
+}
+
+
 void Player::jump(float speed) {
   v.y = -speed;
-  short soundId = rand() % 5;
+  uint8_t soundId = rand() % 5;
   std::string soundName = "jump" + std::to_string(soundId);
   jumpSound.setBuffer(Resources::getSoundBuffer(soundName));
   jumpSound.play();

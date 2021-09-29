@@ -2,7 +2,7 @@
 
 
 GameStateManager::GameStateManager()
-  : player(5*160, 4*160) {
+  : player(33*160, 33*160) {
   states.reserve(2);
   states.push_back(new MenuState(*this, player));
 

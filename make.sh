@@ -1,8 +1,14 @@
 #!/bin/bash
 
+# Create documentation.
+#mkdir -p doc
 #cd doc
 #doxygen
-#cd ../bin
-cmake -B build -DCMAKE_BUILD_TYPE=Release .
+#cd ..
+
+# Compile.
+cmake -B build -DCMAKE_BUILD_TYPE=Debug .
 cmake --build build
-./build/flowerpower
+
+# Start program.
+./build/maybe-a-game

@@ -44,8 +44,30 @@ void Inventory::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 void Inventory::update() {
   std::string contentText;
-  for (auto const& item: items) {
-    contentText.append("-").append(item.getName()).append("\n");
+  std::vector<Item> tempItems(items);
+  std::vector<std::tuple<std::string, float>> listedItems;
+
+  for (auto const& item: tempItems) {
+    auto it = std::find_if(listedItems.begin(), listedItems.end(), [&](auto const& i) {
+      if (std::get<0>(i) == item.getName()) {
+        return true;
+      }
+      return false;
+    });
+
+    if (it == listedItems.end()) {
+      listedItems.emplace_back(item.getName(), item.getWeightGrams());
+    }
+    else {
+      std::get<1>(*it) += item.getWeightGrams();
+    }
+  }
+
+  for (auto const& item: listedItems) {
+    contentText.append(std::get<0>(item))
+               .append("  ")
+               .append(std::to_string(static_cast<int>(std::get<1>(item))))
+               .append("g\n");
   }
   content.setString(contentText);
 }
